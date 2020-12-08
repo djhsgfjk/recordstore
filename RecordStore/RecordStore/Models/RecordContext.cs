@@ -12,7 +12,7 @@ namespace RecordStore.Models
         { }
 
         public DbSet<Artist> Artists { get; set; }
-        public DbSet<Album> Alubms { get; set; }
+        public DbSet<Album> Albums { get; set; }
         public DbSet<Record> Records { get; set; }
     }
 }

@@ -1,0 +1,16 @@
+﻿@using RecordStore.Models
+@{
+    ViewBag.Title = "Albums";
+} 
+
+<h2>@ViewBag.Artist</h2>
+
+@foreach (Album a in ViewBag.Albums)
+{
+    if (a.ArtistId == ViewBag.ArtistId)
+    {
+
+        <p><a href="/Home/Records/@a.Id,@a.Name">@a.Name</a></p>
+    }
+
+}
