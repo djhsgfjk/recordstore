@@ -7,7 +7,7 @@
 
 @foreach (Artist a in ViewBag.Artists)
 {
-    <p><a href="/Home/Albums?id=@a.Id&artist=@a.Name">@a.Name</a></p>
+    <p><a href="/Home/Albums/@a.Id">@a.Name</a></p>
 }
 
 

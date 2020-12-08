@@ -29,21 +29,32 @@ namespace RecordStore.Controllers
         }
 
         [HttpGet]
-        public ActionResult Albums(int id, string artist)
+        public ActionResult Albums(int id)
         {
-            ViewBag.ArtistId = id;
-            IEnumerable<Album> albums = db.Albums;
-            ViewBag.Albums = albums;
-            ViewBag.Artist = artist;           
+            IEnumerable<Artist> allartists = db.Artists.Include(a => a.Albums);
+            Artist artist = new Artist();
+            foreach (Artist a in allartists)
+                if (a.Id == id)
+                {
+                    artist = a;
+                    break;
+                }
+            ViewBag.Artist = artist;
             return View("~/Views/Home/Albums.cshtml");
         }
 
         [HttpGet]
         public ActionResult Records(int id)
         {
-            ViewBag.AlbumId = id;
-            IEnumerable<Record> records = db.Records.Include(a => a.Album);
-            ViewBag.Records = records;
+            IEnumerable<Album> allalbums = db.Albums.Include(a => a.Records).Include(a => a.Artist);
+            Album album = new Album();
+            foreach (Album a in allalbums)
+                if (a.Id == id)
+                { 
+                    album = a;
+                    break;
+                }
+            ViewBag.Album = album;
             return View("~/Views/Home/Records.cshtml");
         }
     }
