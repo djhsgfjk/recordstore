@@ -21,6 +21,7 @@ namespace RecordStore.Controllers
             return View("~/Views/Home/Index.cshtml");
         }
 
+        [HttpGet]
         public ActionResult Artists()
         {
             IEnumerable<Artist> artists = db.Artists;
