@@ -14,10 +14,6 @@ namespace RecordStore.Controllers
 
         public ActionResult Index()
         {
-            /*IEnumerable<Artist> artists = db.Artists;
-            ViewBag.Artists = artists;
-            IEnumerable<Album> albums = db.Albums;
-            ViewBag.Albums = albums;*/
             return View("~/Views/Home/Index.cshtml");
         }
 
