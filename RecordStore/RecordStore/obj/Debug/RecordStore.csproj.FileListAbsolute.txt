@@ -131,7 +131,6 @@ C:\Users\butya\recordstore\RecordStore\RecordStore\bin\System.Numerics.Vectors.x
 C:\Users\butya\recordstore\RecordStore\RecordStore\bin\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\butya\recordstore\RecordStore\RecordStore\bin\System.Threading.Tasks.Extensions.xml
 C:\Users\butya\recordstore\RecordStore\RecordStore\bin\System.ValueTuple.xml
-<<<<<<< HEAD
 C:\Users\butya\source\repos\RecordStore\RecordStore\bin\RecordStore.dll.config
 C:\Users\butya\source\repos\RecordStore\RecordStore\bin\RecordStore.dll
 C:\Users\butya\source\repos\RecordStore\RecordStore\bin\RecordStore.pdb
@@ -265,5 +264,3 @@ C:\Users\butya\source\repos\RecordStore\RecordStore\obj\Debug\RecordStore.csproj
 C:\Users\butya\source\repos\RecordStore\RecordStore\obj\Debug\RecordStore.csproj.CopyComplete
 C:\Users\butya\source\repos\RecordStore\RecordStore\obj\Debug\RecordStore.dll
 C:\Users\butya\source\repos\RecordStore\RecordStore\obj\Debug\RecordStore.pdb
-=======
->>>>>>> 406e379bced60430c121c4509d9b369056c208c9

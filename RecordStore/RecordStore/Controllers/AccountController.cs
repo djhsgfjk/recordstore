@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-<<<<<<< HEAD
 using System.Data.Entity;
-=======
->>>>>>> 406e379bced60430c121c4509d9b369056c208c9
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -13,21 +10,15 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System.Security.Claims;
-<<<<<<< HEAD
 using static RecordStore.Models.Purchase;
-=======
->>>>>>> 406e379bced60430c121c4509d9b369056c208c9
 
 namespace RecordStore.Controllers
 {
     public class AccountController : Controller
     {
-<<<<<<< HEAD
         RecordContext db = new RecordContext();
 
         ApplicationUser user;
-=======
->>>>>>> 406e379bced60430c121c4509d9b369056c208c9
         private ApplicationUserManager UserManager
         {
             get
@@ -46,11 +37,7 @@ namespace RecordStore.Controllers
         {
             if (ModelState.IsValid)
             {
-<<<<<<< HEAD
                 user = new ApplicationUser { UserName = model.UserName, Email = model.Email, Name = model.Name};
-=======
-                ApplicationUser user = new ApplicationUser { UserName = model.UserName, Email = model.Email};
->>>>>>> 406e379bced60430c121c4509d9b369056c208c9
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -87,21 +74,13 @@ namespace RecordStore.Controllers
         {
             if (ModelState.IsValid)
             {
-<<<<<<< HEAD
                 user = await UserManager.FindAsync(model.UserName, model.Password);
-=======
-                ApplicationUser user = await UserManager.FindAsync(model.Email, model.Password);
->>>>>>> 406e379bced60430c121c4509d9b369056c208c9
                 if (user == null)
                 {
                     ModelState.AddModelError("", "Wrong email or password.");
                 }
                 else
-<<<<<<< HEAD
                 { 
-=======
-                {
->>>>>>> 406e379bced60430c121c4509d9b369056c208c9
                     ClaimsIdentity claim = await UserManager.CreateIdentityAsync(user,
                                             DefaultAuthenticationTypes.ApplicationCookie);
                     AuthenticationManager.SignOut();
@@ -117,7 +96,6 @@ namespace RecordStore.Controllers
             ViewBag.returnUrl = returnUrl;
             return View(model);
         }
-<<<<<<< HEAD
 
         public async Task<ActionResult> Account()
         {
@@ -173,12 +151,6 @@ namespace RecordStore.Controllers
                 return RedirectToAction("Purchase");
             }
 
-=======
-        public ActionResult Logout()
-        {
-            AuthenticationManager.SignOut();
-            return RedirectToAction("Login");
->>>>>>> 406e379bced60430c121c4509d9b369056c208c9
         }
 
     }

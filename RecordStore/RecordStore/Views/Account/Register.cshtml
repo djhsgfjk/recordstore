@@ -1,19 +1,12 @@
 ﻿@model RecordStore.Models.RegisterModel
 
-<<<<<<< HEAD
 @{ ViewBag.Title = "Register"; }
-=======
-@{
-    ViewBag.Title = "Register";
-}
->>>>>>> 406e379bced60430c121c4509d9b369056c208c9
 
 <h2>Create Account</h2>
 
 
 @using (Html.BeginForm())
 {
-<<<<<<< HEAD
 @Html.AntiForgeryToken()
 
                 <div>
@@ -54,46 +47,3 @@
                         </div>
                     </div>
                 </div>}
-=======
-    @Html.AntiForgeryToken()
-
-    <div>
-
-        @Html.ValidationSummary(false)
-
-        <div>
-            Email
-            <div>
-                @Html.EditorFor(model => model.Email)
-            </div>
-        </div>
-
-        <div>
-            Name
-            <div>
-                @Html.EditorFor(model => model.UserName)
-            </div>
-        </div>
-
-        <div>
-            Password
-            <div>
-                @Html.EditorFor(model => model.Password)
-            </div>
-        </div>
-
-        <div>
-            Re-type Password
-            <div>
-                @Html.EditorFor(model => model.PasswordConfirm)
-            </div>
-        </div>
-
-        <div>
-            <div>
-                <input type="submit" value="Create Account" />
-            </div>
-        </div>
-    </div>
-}
->>>>>>> 406e379bced60430c121c4509d9b369056c208c9
