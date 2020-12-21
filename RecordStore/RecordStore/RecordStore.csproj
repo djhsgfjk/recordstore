@@ -215,7 +215,10 @@
     <Compile Include="Models\ApplicationContext.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ApplicationUserManager.cs" />
+<<<<<<< HEAD
     <Compile Include="Models\Cart.cs" />
+=======
+>>>>>>> 406e379bced60430c121c4509d9b369056c208c9
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\Purchase.cs" />
     <Compile Include="Models\Record.cs" />
@@ -266,10 +269,13 @@
     <Content Include="Views\Home\Records.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Account\Account.cshtml" />
     <Content Include="Views\Home\Cart.cshtml" />
     <Content Include="Views\Account\Purchase.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+=======
+>>>>>>> 406e379bced60430c121c4509d9b369056c208c9
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

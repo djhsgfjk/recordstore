@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 ﻿@if (Request.IsAuthenticated)
+=======
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+>>>>>>> 406e379bced60430c121c4509d9b369056c208c9
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
@@ -6,12 +11,18 @@
 
     <ul class="nav navbar-nav navbar-right">
         <li>
+<<<<<<< HEAD
             @Html.ActionLink("Account", "Account", "Account", routeValues: null, htmlAttributes: new { title = "Account" })
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
         <li>
             @Html.ActionLink("Cart", "Cart", "Home", routeValues: null, htmlAttributes: new { title = "Cart" })
         </li>
+=======
+            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+        </li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+>>>>>>> 406e379bced60430c121c4509d9b369056c208c9
     </ul>
     }
 }
