@@ -42,5 +42,10 @@ namespace RecordStore.Models
 
         public string Format { get; set; }
         public decimal Price { get; set; }
+        public ICollection<Purchase> Purchases { get; set; }
+        public Record()
+        {
+            Purchases = new List<Purchase>();
+        }
     }
 }

@@ -215,9 +215,9 @@
     <Compile Include="Models\ApplicationContext.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ApplicationUserManager.cs" />
+    <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\Purchase.cs" />
-    <Compile Include="Models\PurchaseContext.cs" />
     <Compile Include="Models\Record.cs" />
     <Compile Include="Models\RecordContext.cs" />
     <Compile Include="Models\RegisterModel.cs" />
@@ -266,7 +266,10 @@
     <Content Include="Views\Home\Records.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Account\Account.cshtml" />
+    <Content Include="Views\Home\Cart.cshtml" />
+    <Content Include="Views\Account\Purchase.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

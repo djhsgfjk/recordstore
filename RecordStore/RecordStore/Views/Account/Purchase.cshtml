@@ -1,0 +1,38 @@
+﻿@model RecordStore.Models.Purchase
+@{
+    ViewBag.Title = "Purchase";
+}
+
+<h2>New purchase</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        Name
+        <div>
+            @Html.EditorFor(model => model.Name)
+        </div>
+    </div>
+
+    <div>
+        Address
+        <div>
+            @Html.EditorFor(model => model.Address)
+        </div>
+    </div>
+
+    <div>
+        Phone Number
+        <div>
+            @Html.EditorFor(model => model.PhoneNumber)
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <input type="submit" value="Order" />
+        </div>
+    </div>
+}

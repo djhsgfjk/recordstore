@@ -1,0 +1,53 @@
+﻿@using RecordStore.Models
+@{
+    ViewBag.Title = "Cart";
+}
+
+<h2>Cart</h2>
+@if (Model.Cart.Lines.Count == 0)
+{
+    <div><p>Your cart is empty.</p></div>
+}
+else
+{
+<table class="table">
+    <thead>
+        <tr>
+            <th>Number</th>
+            <th>Record</th>
+            <th>Format</th>
+            <th class="text-right">Price</th>
+            <th class="text-right">Sum</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var line in Model.Cart.Lines)
+        {
+        <tr>
+            <td class="text-center">@line.Quantity</td>
+            <td class="text-left">@line.Record.Album.Artist.Name - @line.Record.Album.Name</td>
+            <td class="text-left">@line.Record.Format</td>
+            <td class="text-right">@line.Record.Price.ToString("# $")</td>
+            <td class="text-right">
+                @((line.Quantity * line.Record.Price).ToString("# $"))
+            </td>
+            <td class="text-right"><a href="/Home/RemoveFromCart/@line.Record.Id">Remove</a></td>
+        </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right">Sum:</td>
+            <td class="text-right">
+                @Model.Cart.ComputeTotalValue().ToString("# $")
+            </td>
+        </tr>
+    </tfoot>
+</table>
+<div class="text-center">
+    <a class="btn btn-primary" href="/Account/CreatPurchase">Buy</a>
+</div>
+}
+
+
+

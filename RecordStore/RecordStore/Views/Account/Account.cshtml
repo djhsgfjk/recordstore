@@ -1,0 +1,59 @@
+﻿@using RecordStore.Models
+@{
+    ViewBag.Title = "Account";
+}
+
+<h2>Welcome to you account, @ViewBag.User.Name !</h2>
+
+@if (ViewBag.Purchases == null)
+{
+    <div>
+        <p>You haven't done any purchase.</p>
+    </div>
+}
+else
+{
+    <div>
+        <p>Your purchases:</p>
+    </div>
+    <table>
+        @foreach (Purchase p in ViewBag.Purchases)
+        {
+            <tr>
+                <td>
+                    <table>
+                        <tr hidth="70">
+                            <td width="140"><p>@p.Name</p></td>
+                        </tr>
+                        <tr hidth="70">
+                            <td width="140"><p>@p.Address</p>></td>
+                        </tr>
+                        <tr hidth="70">
+                            <td width="140"><p>@p.PhoneNumber</p><</td>>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table>
+                        @foreach (Record r in ViewBag.Purchases.Records)
+                        {
+                            <tr hidth="70">
+                                <td width="70"><p><center>r.Album.Artist.Name - r.Album.Name</center></p></td>
+                                <td width="70"><p><center>@r.Format</center></p></td>
+                                <td width="70"><p><center>@r.Price $</center></p></td>
+                            </tr>
+                        }
+                        <tr>
+                            <td colspan="2">@p.Sum</td>
+                            <td>@p.Date</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+
+
+

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -9,11 +10,15 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System.Security.Claims;
+using static RecordStore.Models.Purchase;
 
 namespace RecordStore.Controllers
 {
     public class AccountController : Controller
     {
+        RecordContext db = new RecordContext();
+
+        ApplicationUser user;
         private ApplicationUserManager UserManager
         {
             get
@@ -32,7 +37,7 @@ namespace RecordStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                ApplicationUser user = new ApplicationUser { UserName = model.UserName, Email = model.Email};
+                user = new ApplicationUser { UserName = model.UserName, Email = model.Email, Name = model.Name};
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -69,13 +74,13 @@ namespace RecordStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                ApplicationUser user = await UserManager.FindAsync(model.UserName, model.Password);
+                user = await UserManager.FindAsync(model.UserName, model.Password);
                 if (user == null)
                 {
                     ModelState.AddModelError("", "Wrong email or password.");
                 }
                 else
-                {
+                { 
                     ClaimsIdentity claim = await UserManager.CreateIdentityAsync(user,
                                             DefaultAuthenticationTypes.ApplicationCookie);
                     AuthenticationManager.SignOut();
@@ -91,10 +96,61 @@ namespace RecordStore.Controllers
             ViewBag.returnUrl = returnUrl;
             return View(model);
         }
-        public ActionResult Logout()
+
+        public async Task<ActionResult> Account()
         {
-            AuthenticationManager.SignOut();
-            return RedirectToAction("Login");
+            var userId = User.Identity.GetUserId();
+            if (userId == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                user = await UserManager.FindByIdAsync(userId);
+
+            }
+            ViewBag.User = user;
+
+            /*ICollection<Purchase> purchases = null;
+            IEnumerable<Purchase> allpurchases = db.Purchases.Includ(a => a.Album.Artist);
+            if (allpurchases != null)
+            { 
+            foreach (Purchase p in allpurchases)
+                if (p.UserId == user.Id)
+                {
+                    purchases.Add(p);
+                }
+            }
+            ViewBag.Purchases = purchases;
+            */
+            return View();
+        }
+
+
+        public ActionResult Purchase()
+        {
+            return View();
+        }
+
+        /*[HttpPost]
+        public Task<ActionResult> Purchase(Purchase model)
+        {
+            Purchase purchase = new Purchase { Name = model.Name, Address = model.Address, PhoneNumber = model.PhoneNumber };
+
+            return View(model);
+        }*/
+
+        public RedirectToRouteResult CreatPurchase()
+        {
+            if (user == null)
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                return RedirectToAction("Purchase");
+            }
+
         }
 
     }

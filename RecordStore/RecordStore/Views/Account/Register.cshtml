@@ -1,52 +1,49 @@
 ﻿@model RecordStore.Models.RegisterModel
 
-@{
-    ViewBag.Title = "Register";
-}
+@{ ViewBag.Title = "Register"; }
 
 <h2>Create Account</h2>
 
 
 @using (Html.BeginForm())
 {
-    @Html.AntiForgeryToken()
+@Html.AntiForgeryToken()
 
-    <div>
+                <div>
 
-        @Html.ValidationSummary(false)
+                    @Html.ValidationSummary(false)
 
-        <div>
-            Email
-            <div>
-                @Html.EditorFor(model => model.Email)
-            </div>
-        </div>
+                    <div>
+                        Email
+                        <div>
+                            @Html.EditorFor(model => model.UserName)
+                        </div>
+                    </div>
 
-        <div>
-            Name
-            <div>
-                @Html.EditorFor(model => model.UserName)
-            </div>
-        </div>
+                    <div>
+                        Name
+                        <div>
+                            @Html.EditorFor(model => model.Name)
+                        </div>
+                    </div>
 
-        <div>
-            Password
-            <div>
-                @Html.EditorFor(model => model.Password)
-            </div>
-        </div>
+                    <div>
+                        Password
+                        <div>
+                            @Html.EditorFor(model => model.Password)
+                        </div>
+                    </div>
 
-        <div>
-            Re-type Password
-            <div>
-                @Html.EditorFor(model => model.PasswordConfirm)
-            </div>
-        </div>
+                    <div>
+                        Re-type Password
+                        <div>
+                            @Html.EditorFor(model => model.PasswordConfirm)
+                        </div>
+                    </div>
 
-        <div>
-            <div>
-                <input type="submit" value="Create Account" />
-            </div>
-        </div>
-    </div>
-}
+                    <div>
+                        <div>
+                            <input type="submit" value="Create Account" />
+                        </div>
+                    </div>
+                </div>}

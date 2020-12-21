@@ -1,7 +1,5 @@
 ﻿@using RecordStore.Models
-@{
-    ViewBag.Title = "Records";
-}
+@{ ViewBag.Title = "Records"; }
 
 <h2>@ViewBag.Album.Artist.Name - @ViewBag.Album.Name</h2>
 
@@ -11,8 +9,8 @@
     <tr height="40">
         <td width="70"><p><center>@a.Format</center></p></td>
         <td width="70"><p><center>@a.Price $</center></p></td>
-        <td width="70"><p><a href="/Home/AddToCart/@a.Id"><center>Add to cart</center></a></p></td>
+        <td width="70"><p><a href="/Home/AddToCart/@a.Id"><center>Add to cart</center></a></p>
+        </td>
     </tr>
     }
-
 </table>

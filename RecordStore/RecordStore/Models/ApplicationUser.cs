@@ -8,8 +8,10 @@ namespace RecordStore.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        public string Name { get; set; }
         public ApplicationUser()
         {
+
         }
     }
 }

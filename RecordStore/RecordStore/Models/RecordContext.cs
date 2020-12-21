@@ -8,11 +8,21 @@ namespace RecordStore.Models
 {
     public class RecordContext : DbContext
     {
-        public RecordContext() : base("RecordContext")
-        { }
-
         public DbSet<Artist> Artists { get; set; }
         public DbSet<Album> Albums { get; set; }
         public DbSet<Record> Records { get; set; }
+        public DbSet<Purchase> Purchases { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Purchase>().HasMany(c => c.Records)
+                .WithMany(s => s.Purchases)
+                .Map(t => t.MapLeftKey("PurchaseId")
+                .MapRightKey("RecordId")
+                .ToTable("PurchaseRecord"));
+        }
+
+        public RecordContext() : base("RecordContext")
+        { }
     }
 }

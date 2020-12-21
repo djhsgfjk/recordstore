@@ -8,12 +8,18 @@ namespace RecordStore.Models
 {
     public class RegisterModel
     {
-        [Required]
         public string Email { get; set; }
-        
 
         [Required]
         public string UserName { get; set; }
+
+        public void EmailIsUserName()
+        {
+            Email = UserName;
+        }
+
+        [Required]
+        public string Name { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
