@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Records";
+}
+
+<h2>Records</h2>
+
+<div id="tableBlock"></div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            GetRecords();
+
+        });
+        // Получение всех records по ajax-запросу
+        function GetAllBooks() {
+
+            $.ajax({
+                url: '/api/Records',
+                type: 'GET',
+                dataType: "text",
+                accepts: {
+                    text: "application/x-records"
+                },
+                success: function (data) {
+
+                    WriteResponse(data);
+                }
+            });
+        };
+        // вывод полученных данных на экран
+        function WriteResponse(data) {
+            var strResult = "<table><th>ID</th><th>Название</th><th>Год Издания</th>";
+            var arr = data.split(",");
+            for (var i = 0; i < arr.length; i += 3) {
+                strResult += "<tr><td>" + arr[i] + "</td><td> " + arr[i + 1] + "</td><td>"
+                    + arr[i + 2] + "</td></tr>";
+            }
+            strResult += "</table>";
+            console.log(strResult);
+            $("#tableBlock").html(strResult);
+        }
+
+    </script>
+}

@@ -19,10 +19,12 @@ namespace RecordStore.Models
                 .WithMany(s => s.Purchases)
                 .Map(t => t.MapLeftKey("PurchaseId")
                 .MapRightKey("RecordId")
-                .ToTable("PurchaseRecord"));
+                .ToTable("PurchaseRecords"));
         }
+        public DbSet<PurchaseRecord> PurchaseRecords { get; set; }
 
-        public RecordContext() : base("RecordContext")
+                public RecordContext() : base("RecordContext")
         { }
+
     }
 }

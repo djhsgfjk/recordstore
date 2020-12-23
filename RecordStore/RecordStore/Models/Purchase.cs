@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -22,7 +23,19 @@ namespace RecordStore.Models
         {
             Records = new List<Record>();
         }
+
         public DateTime Date { get; set; }
     }
 
+    public class PurchaseRecord
+    {
+        public int Id { get; set; }
+        public int PurchaseId {get; set;}
+        public Purchase Purchase { get; set; }
+
+        public int RecordId {get; set;}
+        public Record Record { get; set; }
+    }
+
+   
 }

@@ -14,6 +14,7 @@ namespace RecordStore.Controllers
     {
         RecordContext db = new RecordContext();
 
+
         public ActionResult Index()
         {
             return View("~/Views/Home/Index.cshtml");

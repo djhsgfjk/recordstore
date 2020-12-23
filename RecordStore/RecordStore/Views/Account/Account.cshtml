@@ -13,45 +13,53 @@
 }
 else
 {
-    <div>
+    <h3>
         <p>Your purchases:</p>
-    </div>
-    <table>
-        @foreach (Purchase p in ViewBag.Purchases)
-        {
+    </h3>
+
+    int i = 0;
+    int id = 0;
+    foreach (PurchaseRecord p in ViewBag.Purchases)
+    {
+        <table>
             <tr>
                 <td>
-                    <table>
-                        <tr hidth="70">
-                            <td width="140"><p>@p.Name</p></td>
-                        </tr>
-                        <tr hidth="70">
-                            <td width="140"><p>@p.Address</p>></td>
-                        </tr>
-                        <tr hidth="70">
-                            <td width="140"><p>@p.PhoneNumber</p><</td>>
-                        </tr>
-                    </table>
+                    @if (p.Purchase.Id != id)
+                    {
+                        i++;
+                        id = p.Purchase.Id;
+                        <h4>Purchase № @i</h4>
+                        <table>
+                            <tr hidth="70">
+                                <td width="220"><p>@p.Purchase.Name</p></td>
+                            </tr>
+                            <tr hidth="70">
+                                <td width="220"><p>@p.Purchase.Address</p></td>
+                            </tr>
+                            <tr hidth="70">
+                                <td width="220"><p>@p.Purchase.PhoneNumber</p></td>
+                            </tr>
+                            <tr>
+                                <td width="220">Sum: @p.Purchase.Sum $</td>
+                            </tr>
+                            <tr>
+                                <td width="220">Date: @p.Purchase.Date.Day/@p.Purchase.Date.Month/@p.Purchase.Date.Year</td>
+                            </tr>
+                        </table>
+                    }
                 </td>
                 <td>
                     <table>
-                        @foreach (Record r in ViewBag.Purchases.Records)
-                        {
-                            <tr hidth="70">
-                                <td width="70"><p><center>r.Album.Artist.Name - r.Album.Name</center></p></td>
-                                <td width="70"><p><center>@r.Format</center></p></td>
-                                <td width="70"><p><center>@r.Price $</center></p></td>
-                            </tr>
-                        }
-                        <tr>
-                            <td colspan="2">@p.Sum</td>
-                            <td>@p.Date</td>
+                        <tr hidth="70">
+                            <td width="140"><p>@p.Record.Album.Artist.Name - @p.Record.Album.Name</p></td>
+                            <td width="140"><p>@p.Record.Format</p></td>
+                            <td width="140"><p>@p.Record.Price $</p></td>
                         </tr>
                     </table>
                 </td>
             </tr>
-        }
-    </table>
+        </table>
+    }
 }
 
 

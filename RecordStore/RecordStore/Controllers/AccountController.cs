@@ -12,19 +12,28 @@ using Microsoft.Owin.Security;
 using System.Security.Claims;
 using static RecordStore.Models.Purchase;
 
+
 namespace RecordStore.Controllers
 {
     public class AccountController : Controller
     {
         RecordContext db = new RecordContext();
+        
 
-        ApplicationUser user;
+        ApplicationUser user = new ApplicationUser();
+
+
         private ApplicationUserManager UserManager
         {
             get
             {
                 return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
+        }
+
+        private void FindUser()
+        {
+            user = UserManager.FindById(User.Identity.GetUserId());
         }
 
         public ActionResult Register()
@@ -99,49 +108,24 @@ namespace RecordStore.Controllers
 
         public async Task<ActionResult> Account()
         {
-            var userId = User.Identity.GetUserId();
-            if (userId == null)
+            FindUser();
+            if (user == null)
             {
                 return RedirectToAction("Index", "Home");
             }
-            else
-            {
-                user = await UserManager.FindByIdAsync(userId);
-
-            }
             ViewBag.User = user;
 
-            /*ICollection<Purchase> purchases = null;
-            IEnumerable<Purchase> allpurchases = db.Purchases.Includ(a => a.Album.Artist);
-            if (allpurchases != null)
-            { 
-            foreach (Purchase p in allpurchases)
-                if (p.UserId == user.Id)
-                {
-                    purchases.Add(p);
-                }
-            }
-            ViewBag.Purchases = purchases;
-            */
+            IEnumerable<PurchaseRecord> purchaserecord = db.PurchaseRecords
+                .Include(a => a.Purchase)
+                .Include(a => a.Record.Album.Artist)
+                .OrderBy(p => p.Purchase.UserId == user.Id);
+            ViewBag.Purchases = purchaserecord;
             return View();
         }
-
-
-        public ActionResult Purchase()
-        {
-            return View();
-        }
-
-        /*[HttpPost]
-        public Task<ActionResult> Purchase(Purchase model)
-        {
-            Purchase purchase = new Purchase { Name = model.Name, Address = model.Address, PhoneNumber = model.PhoneNumber };
-
-            return View(model);
-        }*/
 
         public RedirectToRouteResult CreatPurchase()
         {
+            FindUser();
             if (user == null)
             {
                 return RedirectToAction("Login");
@@ -150,8 +134,54 @@ namespace RecordStore.Controllers
             {
                 return RedirectToAction("Purchase");
             }
+        }
 
+        public ActionResult Purchase()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public RedirectToRouteResult Purchase(Purchase model)
+        {
+
+            if (ModelState.IsValid)
+            {
+                Cart cart = GetCart();
+                Decimal sum = cart.ComputeTotalValue();
+                Purchase purchase = new Purchase {
+                    UserId = user.Id, Name = model.Name, Address = model.Address, 
+                    PhoneNumber = model.PhoneNumber, Sum = sum, Date = DateTime.Today };
+                
+                foreach (var line in cart.Lines)
+                {
+                    purchase.Records.Add(line.Record);
+                }
+                db.Purchases.Add(purchase);
+                db.SaveChanges();
+
+                return RedirectToAction("Payment", new { sum });
+            }
+
+            return RedirectToAction("Cart", "Home");
+        }
+
+        public Cart GetCart()
+        {
+            Cart cart = (Cart)Session["Cart"];
+            if (cart == null)
+            {
+                cart = new Cart();
+                Session["Cart"] = cart;
+            }
+            return cart;
+        }
+
+        public ActionResult Payment(decimal Sum)
+        { 
+            return View();
         }
 
     }
 }
+
