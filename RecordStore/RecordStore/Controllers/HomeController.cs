@@ -44,7 +44,6 @@ namespace RecordStore.Controllers
             IEnumerable<Album> allalbums = db.Albums.Include(a => a.Records).Include(a => a.Artist);
             Album album = allalbums.FirstOrDefault(a => a.Id == Id);
             ViewBag.Album = album;
-
             return View("~/Views/Home/Records.cshtml");
         }
 
@@ -58,15 +57,16 @@ namespace RecordStore.Controllers
 
         public RedirectToRouteResult AddToCart(int Id)
         {
-            Record record = db.Records.Include(a => a.Album.Artist)
+            Record record = db.Records
                 .FirstOrDefault(r => r.Id == Id);
+            record.Id = Id;
 
             if (record != null)
             {
                 GetCart().AddItem(record, 1);
             }
 
-            return RedirectToAction("Records", new { record.Album.Id });        
+            return RedirectToAction("Records", new { Id = record.AlbumId });        
         }
 
         public RedirectToRouteResult RemoveFromCart(int Id)

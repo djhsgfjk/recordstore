@@ -31,10 +31,8 @@ namespace RecordStore.Models
     {
         public int Id { get; set; }
         public int PurchaseId {get; set;}
-        public Purchase Purchase { get; set; }
 
         public int RecordId {get; set;}
-        public Record Record { get; set; }
     }
 
    

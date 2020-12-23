@@ -6,11 +6,12 @@
 <table>
     @foreach (Record a in ViewBag.Album.Records)
     {
-    <tr height="40">
-        <td width="70"><p><center>@a.Format</center></p></td>
-        <td width="70"><p><center>@a.Price $</center></p></td>
-        <td width="70"><p><a href="/Home/AddToCart/@a.Id"><center>Add to cart</center></a></p>
-        </td>
-    </tr>
-    }
-</table>
+<tr height="40">
+    <td width="70"><p><center>@a.Format</center></p></td>
+    <td width="70"><p><center>@a.Price $</center></p></td>
+    <td width="70">
+        <p><a href="/Home/AddToCart/@a.Id"><center>Add to cart</center></a></p>
+    </td>
+</tr>
+}
+    </tabl

@@ -1,16 +1,15 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using RecordStore.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using RecordStore.Models;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using System.Security.Claims;
-using static RecordStore.Models.Purchase;
 
 
 namespace RecordStore.Controllers
@@ -115,11 +114,11 @@ namespace RecordStore.Controllers
             }
             ViewBag.User = user;
 
-            IEnumerable<PurchaseRecord> purchaserecord = db.PurchaseRecords
-                .Include(a => a.Purchase)
-                .Include(a => a.Record.Album.Artist)
-                .OrderBy(p => p.Purchase.UserId == user.Id);
-            ViewBag.Purchases = purchaserecord;
+            IEnumerable<Purchase> purchases = db.Purchases
+                .Include(a => a.Records)
+                .OrderBy(p => p.UserId == user.Id);
+
+            ViewBag.Purchases = purchases;
             return View();
         }
 
@@ -152,10 +151,15 @@ namespace RecordStore.Controllers
                 Purchase purchase = new Purchase {
                     UserId = user.Id, Name = model.Name, Address = model.Address, 
                     PhoneNumber = model.PhoneNumber, Sum = sum, Date = DateTime.Today };
-                
+                IEnumerable<Record> allrecords = db.Records;
+                Record record = new Record();
                 foreach (var line in cart.Lines)
                 {
-                    purchase.Records.Add(line.Record);
+                    record = allrecords.FirstOrDefault(r => r.Id == line.Record.Id);
+                    for (int i = 0; i < line.Quantity; i++)
+                    {
+                        purchase.Records.Add(record);
+                    }
                 }
                 db.Purchases.Add(purchase);
                 db.SaveChanges();
